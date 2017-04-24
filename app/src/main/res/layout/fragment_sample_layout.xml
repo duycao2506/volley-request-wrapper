@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:columnOrderPreserved="true"
+        android:padding="20sp"
+        android:columnCount="4"
+
+        >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            style="@style/KasperButton"
+            android:id="@+id/snack"
+            android:text="Snack"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            style="@style/KasperButton"
+            android:id="@+id/activity"
+            android:text="Activity"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            style="@style/KasperButton"
+            android:id="@+id/recycle"
+            android:text="Recycle"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            style="@style/KasperButton"
+            android:id="@+id/loading"
+            android:text="Loading"
+            />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            style="@style/KasperButton"
+            android:text="Hello"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            style="@style/KasperButton"
+            android:text="Hello"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            style="@style/KasperButton"
+            android:text="Hello"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            style="@style/KasperButton"
+            android:text="Hello"
+            />
+
+
+    </GridLayout>
+
+
+
+</LinearLayout>

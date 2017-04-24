@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My Android Framework</string>
+    <string name="cant_internet">Cannot Connect to Internet</string>
+    <string name="error_check_internet">Error checking internet connection</string>
+    <string name="OK">ok</string>
+    <string name="not_connect_internet">No network available</string>
+    <string name="title_activity_stateful">StatefulActivity</string>
+    <string name="close">Close</string>
+</resources>
