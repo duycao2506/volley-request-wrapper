@@ -6,12 +6,14 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import kaser.com.myandroidframework.framework_components.BaseApplication;
@@ -24,32 +26,38 @@ import kaser.com.myandroidframework.framework_components.utils.MyCallBack;
  */
 
 public class RequestService {
-    private Map<String, Object> params;
+    protected Map<String, Object> params;
+    protected Map<String, Object> headers;
+    protected GeneralResponse response;
+    private String api;
 
     public interface RequestServiceConstant {
-        String BASE_URL = "";
+        String BASE_URL = "http://jsonplaceholder.typicode.com/";
         String api1 = "";
 
     }
 
 
-    private String api;
+
     MyCallBack caller;
     AsyncTask<Void, Void, Void> requestTask;
-    GeneralResponse response;
 
-    public RequestService(String api, MyCallBack caller, GeneralResponse response, Map<String, Object> params) {
-        this.api = api;
-        this.caller = caller;
-        this.response = response;
+
+
+    public void setParams(Map<String, Object> params) {
         this.params = params;
+    }
+
+    public void setHeaders(Map<String, Object> headers) {
+        this.headers = headers;
     }
 
     public RequestService(String api, MyCallBack caller, GeneralResponse response) {
         this.api = api;
         this.caller = caller;
         this.response = response;
-        this.params = null;
+        this.params = new HashMap<>();
+        this.headers = new HashMap<>();
     }
 
     public RequestService() {
@@ -76,14 +84,15 @@ public class RequestService {
                 caller.callback(RequestService.this.api,0,response);
             }
         };
-        this.requestTask.execute();
+        this.requestTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
 
     private void request() throws Exception {
-        StringRequest stringRequest = createRequestGET(
-                buildGETRequestURL(RequestServiceConstant.BASE_URL,api,this.params),
-                this.response);
+        StringBuilder builder = new StringBuilder();
+        builder.append(RequestServiceConstant.BASE_URL);
+        builder.append(api);
+        StringRequest stringRequest = buildStringRequest(builder.toString());
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         BaseApplication.getVolleyInstance().addToRequestQueue(stringRequest);
@@ -94,10 +103,37 @@ public class RequestService {
         throw new Exception(response.getError());
     }
 
+    protected StringRequest buildStringRequest(String url) {
+        return null;
+    }
+
 
     //utils
 
-    public static String addParamstToGETRequest(String url, Map<String, Object> params) {
+
+
+
+
+
+
+    protected static StringRequest createRequestPOST(String url, GeneralResponse modelResponse, Map params, Map headers) {
+        return new KasperStringRequest(Request.Method.POST, url, params, modelResponse, modelResponse, headers);
+    }
+
+    protected static StringRequest createRequestGET(String url, GeneralResponse modelResponse, Map params, Map headers) {
+        String builtUrl = addParamstToGETRequest(url,params);
+        return new KasperStringRequest(Request.Method.GET, builtUrl, null, modelResponse, modelResponse, headers);
+    }
+
+    protected static StringRequest createRequestPOST(String url, GeneralResponse modelResponse, JSONObject object, Map headers) {
+        return new JsonBobyRequest(url, modelResponse, object, headers);
+    }
+    protected static StringRequest createRequestPOST(String url, GeneralResponse modelResponse, JSONArray object , Map headers) {
+        return new JsonBobyRequest(url, modelResponse, object, headers);
+    }
+
+
+    protected static String addParamstToGETRequest(String url, Map<String, Object> params) {
         if (params == null || params.isEmpty()) {
             return url;
         }
@@ -134,26 +170,5 @@ public class RequestService {
     }
 
 
-    public static StringRequest createRequestGET(String url, GeneralResponse modelResponse) {
-        return new KasperStringRequest(Request.Method.GET, url, null, modelResponse, modelResponse);
-    }
 
-    public static StringRequest createRequestPOSTwithParams(String url, GeneralResponse modelResponse, Map params) {
-        return new KasperStringRequest(Request.Method.POST, url, params, modelResponse, modelResponse);
-    }
-
-    public static StringRequest createRequestGETwithCustomHeaders(String url, GeneralResponse modelResponse, Map headers, Map params) {
-        return new KasperStringRequest(Request.Method.GET, url, params, modelResponse, modelResponse, headers);
-    }
-
-    public static com.android.volley.toolbox.StringRequest createRequestPOSTwithJsonObject(String url, GeneralResponse modelResponse, JSONObject object) throws JSONException {
-        return new JsonBobyRequest(url, modelResponse, object);
-    }
-
-    public static String buildGETRequestURL(String base, String api, Map<String, Object> params){
-        StringBuilder builder = new StringBuilder();
-        builder.append(base);
-        builder.append(api);
-        return addParamstToGETRequest(builder.toString(),params);
-    }
 }

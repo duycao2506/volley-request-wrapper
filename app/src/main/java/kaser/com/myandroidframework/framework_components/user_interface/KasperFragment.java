@@ -19,6 +19,10 @@ public class KasperFragment extends Fragment {
 
     }
 
+    /**
+     * set custom layout for fragments
+     * @param res
+     */
     public void setResource(int res){
         this.res = res;
     }
@@ -33,6 +37,11 @@ public class KasperFragment extends Fragment {
         return parent;
     }
 
+    /**
+     *
+     * init views from parent
+     * @param parent
+     */
     protected void onKasperViewCreate(View parent) {
 
     }

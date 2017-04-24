@@ -22,8 +22,9 @@ public class GeneralResponse implements Response.Listener<String>, Response.Erro
 
     @Override
     public void onResponse(String response) {
-
         this.response = response;
+        gotResponse = true;
+        responseError = false;
     }
 
     public String getError() {

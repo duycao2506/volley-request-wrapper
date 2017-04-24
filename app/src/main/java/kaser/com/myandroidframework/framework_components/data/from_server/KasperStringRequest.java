@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class KasperStringRequest extends com.android.volley.toolbox.StringRequest {
 
-    private final Map<String, String> _params;
+    private Map<String, String> _params;
 
     private Map<String, String> _customheaders;
 
@@ -34,6 +34,8 @@ public class KasperStringRequest extends com.android.volley.toolbox.StringReques
 
     @Override
     protected Map<String, String> getParams() {
+        if (_params == null)
+            _params = new HashMap<String, String>();
         return _params;
     }
 
