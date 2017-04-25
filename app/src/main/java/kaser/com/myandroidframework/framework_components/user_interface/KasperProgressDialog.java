@@ -6,6 +6,8 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import kaser.com.myandroidframework.R;
+
 /**
  * Created by admin on 4/2/17.
  */
@@ -17,6 +19,8 @@ public class KasperProgressDialog extends ProgressDialog {
     public static ProgressDialog ctor(Context context, int theme, int contentView) {
         KasperProgressDialog dialog = new KasperProgressDialog(context, theme);
         dialog.contentView = contentView;
+        dialog.getWindow().setWindowAnimations(R.style.progress_animation_in_out);
+        dialog.getWindow().setDimAmount(2.0f);
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
         return dialog;

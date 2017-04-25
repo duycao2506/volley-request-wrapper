@@ -31,4 +31,8 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
+    <style name="progress_animation_in_out">
+        <item name="android:windowEnterAnimation">@anim/fade_int</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
 </resources>

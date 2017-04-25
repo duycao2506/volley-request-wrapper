@@ -15,9 +15,7 @@ import kaser.com.myandroidframework.framework_components.utils.MyCallBack;
 public class KasperActivity extends AppCompatActivity implements MyCallBack {
 
     public static final String FINISH = "F";
-
     public static final String START = "S";
-
     public static final String SNACKSHOW = "SS";
 
     protected Fragment mainFragment;

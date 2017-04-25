@@ -3,7 +3,11 @@ package kaser.com.myandroidframework.framework_components.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.json.JSONObject;
+
+import io.realm.RealmObject;
 
 /**
  * Created by admin on 4/2/17.
@@ -11,7 +15,35 @@ import org.json.JSONObject;
 
 public class SuperObject extends Object implements Parcelable {
 
+    @SerializedName("id")
+    String id;
 
+    @SerializedName("title")
+    String name;
+
+    @SerializedName("bodytag")
+    String bodytag;
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public SuperObject() {
         super();
@@ -36,6 +68,7 @@ public class SuperObject extends Object implements Parcelable {
         }
     };
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -45,8 +78,6 @@ public class SuperObject extends Object implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
 
     }
-
-
 }
 
 
